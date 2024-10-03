@@ -1,0 +1,5 @@
+FROM openjdk:17
+WORKDIR /C:/Users/amulyam/Documents/workspace/Theme_Form_Mapping
+COPY . /C:/Users/amulyam/Documents/workspace/Theme_Form_Mapping/target/Client_Form-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
