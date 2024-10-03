@@ -68,7 +68,7 @@ public class Theme_Controller {
 		return ResponseEntity.ok(updatedThemeMapping);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/mapped_themes/{id}")
 	public ResponseEntity<Void> deleteThemeMapping(@PathVariable String id) {
 		themeMappingService.deleteThemeMapping(id);
 		return ResponseEntity.noContent().build();
