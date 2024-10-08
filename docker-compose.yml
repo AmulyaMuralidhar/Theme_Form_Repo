@@ -17,7 +17,7 @@ services:
     depends_on:
       - mongo
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/your_database
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/ThemeMappingSchema
 
 volumes:
   mongo_data:

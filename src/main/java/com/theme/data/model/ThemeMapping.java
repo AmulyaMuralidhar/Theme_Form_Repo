@@ -4,14 +4,18 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Date;
 
 @Data
-@Document(collection = "themeMapping")
+@Document(collection = "ThemeMappingSchema")
 public class ThemeMapping {
     @Id
     private String id;
+    @NotBlank(message = "FormId cannot not be empty")
     private Object formId; // Object to save column data in JSON format
+    @NotBlank(message = "ThemeId cannot not be empty")
     private String themeId;
     private Date createStamp = new Date();
     private Date modifyStamp = new Date();

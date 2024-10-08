@@ -2,18 +2,21 @@ package com.theme.data.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.Date;
 
 	@Data
-	@Document(collection = "theme")
+	@Document(collection = "ThemeSchema")
 	public class Theme {
 	    @Id
 	    private String id;
+	    @NotBlank(message = "Theme Name cannot not be empty")
 	    private String themeName;
+	    @NotBlank(message = "Theme Data cannot not be empty")
 	    private Object themeData; // Object to save column data in JSON format
-	    private Date date = new Date();
+	    private Date Date = new Date();
 	    private Date modifyDate = new Date();
 		public String getId() {
 			return id;
@@ -33,11 +36,11 @@ import java.util.Date;
 		public void setThemeData(Object themeData) {
 			this.themeData = themeData;
 		}
-		public Date getDate() {
-			return date;
+		public Date getCreateDate() {
+			return Date;
 		}
-		public void setDate(Date date) {
-			this.date = date;
+		public void setCreateDate(Date date) {
+			this.Date = date;
 		}
 		public Date getModifyDate() {
 			return modifyDate;
@@ -47,7 +50,7 @@ import java.util.Date;
 		}
 		@Override
 		public String toString() {
-			return "Theme [id=" + id + ", themeName=" + themeName + ", themeData=" + themeData + ", date=" + date
+			return "Theme [id=" + id + ", themeName=" + themeName + ", themeData=" + themeData + ", date=" + Date
 					+ ", modifyDate=" + modifyDate + "]";
 		}
 		public Theme(String id, String themeName, Object themeData, Date date, Date modifyDate) {
@@ -55,7 +58,7 @@ import java.util.Date;
 			this.id = id;
 			this.themeName = themeName;
 			this.themeData = themeData;
-			this.date = date;
+			this.Date = date;
 			this.modifyDate = modifyDate;
 		}
 	    

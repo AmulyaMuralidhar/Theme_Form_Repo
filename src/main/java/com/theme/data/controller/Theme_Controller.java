@@ -10,7 +10,7 @@ import com.theme.data.service.ThemeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/themes")
+@RequestMapping("/themes")
 public class Theme_Controller {
 
 	@Autowired
@@ -25,13 +25,13 @@ public class Theme_Controller {
 		return new ResponseEntity(theme, HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/theme/data/{id}")
 	public ResponseEntity<Theme> getThemeById(@PathVariable String id) {
 		Theme theme = themeService.getThemeById(id);
 		return theme != null ? new ResponseEntity<>(theme, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping
+	@PostMapping("/theme/data/save")
 	public ResponseEntity<Theme> createTheme(@RequestBody Theme theme) {
 		Theme createdTheme = themeService.createTheme(theme);
 		return new ResponseEntity<>(createdTheme, HttpStatus.CREATED);
@@ -62,7 +62,7 @@ public class Theme_Controller {
         return themeMapping != null ? new ResponseEntity<>(themeMapping, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-	@PostMapping("/mapped_themes")
+	@PostMapping("/theme/map/save")
 	public ResponseEntity<ThemeMapping> createThemeMapping(@RequestBody ThemeMapping themeMapping) {
 		ThemeMapping createdThemeMapping = themeMappingService.createThemeMapping(themeMapping);
         return new ResponseEntity<>(createdThemeMapping, HttpStatus.CREATED);
@@ -77,6 +77,6 @@ public class Theme_Controller {
 	@DeleteMapping("/mapped_themes/{id}")
 	 public ResponseEntity<Void> deleteThemeMapping(@PathVariable String id) {
         themeMappingService.deleteThemeMapping(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
     }
 }
