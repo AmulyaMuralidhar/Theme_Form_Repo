@@ -1,41 +1,43 @@
 package com.theme.data.controller;
+
+import com.theme.data.dto.FormDataDTO;
+import com.theme.data.service.FormDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.theme.data.model.FormData;
-import com.theme.data.service.FormDataService;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/form-data")
+@RequestMapping("/forms/data")
 public class FormDataController {
+
     @Autowired
     private FormDataService formDataService;
 
-    @GetMapping("/forms/data/list")
-    public ResponseEntity<List<FormData>> getAllFormData() {
-        return ResponseEntity.ok(formDataService.getAllFormData());
-    }
-    
-    @PostMapping("/form/data/save")
-    public ResponseEntity<FormData> createFormData(@RequestBody FormData formData) {
-        return ResponseEntity.ok(formDataService.createFormData(formData));
+    @GetMapping("/list")
+    public ResponseEntity<List<FormDataDTO>> getAllFormData() {
+        List<FormDataDTO> formDataList = formDataService.getAllFormData();
+        return formDataList != null && !formDataList.isEmpty() ? new ResponseEntity<>(formDataList, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/form/data/{formId}")
-    public ResponseEntity<List<FormData>> getFormDataByFormId(@PathVariable String formId) {
-        return ResponseEntity.ok(formDataService.getFormDataByFormId(formId));
+    @GetMapping("/{formId}")
+    public ResponseEntity<FormDataDTO> getFormDataByFormId(@PathVariable String formId) {
+        FormDataDTO formDataDTO = formDataService.getFormDataByFormId(formId);
+        return new ResponseEntity<>(formDataDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<FormData> updateFormData(@PathVariable String id, @RequestBody FormData formData) {
-        formData.setId(id);
-        return ResponseEntity.ok(formDataService.updateFormData(formData));
+    @PostMapping("/save")
+    public ResponseEntity<FormDataDTO> createFormData(@Valid @RequestBody FormDataDTO formDataDTO) {
+        FormDataDTO createdFormData = formDataService.createFormData(formDataDTO);
+        return new ResponseEntity<>(createdFormData, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFormData(@PathVariable String id) {
-        formDataService.deleteFormData(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{formId}")
+    public ResponseEntity<FormDataDTO> updateFormData(@PathVariable String formId, @Valid @RequestBody FormDataDTO formDataDTO) {
+        FormDataDTO updatedFormData = formDataService.updateFormData(formId, formDataDTO);
+        return new ResponseEntity<>(updatedFormData, HttpStatus.OK);
     }
+
 }

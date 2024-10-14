@@ -1,24 +1,20 @@
-package com.theme.data.model;
-
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import jakarta.validation.constraints.NotBlank;
+package com.theme.data.dto;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
-@Document(collection = "ThemeMappingSchema")
-public class ThemeMapping {
-    @Id
+@AllArgsConstructor
+@NoArgsConstructor
+public class ThemeMappingDTO {
     private String id;
-    @NotBlank(message = "FormId cannot not be empty")
-    private String formId; // Object to save column data in JSON format
-    @NotBlank(message = "ThemeId cannot not be empty")
-    private String themeId;
-    private Date createStamp = new Date();
-    private Date modifyStamp = new Date();
+    private String formId;  // Foreign key from Form
+    private String themeId; // Foreign key from Theme
+    private Date createStamp;
+    private Date modifyStamp;
 	public String getId() {
 		return id;
 	}
@@ -49,10 +45,9 @@ public class ThemeMapping {
 	public void setModifyStamp(Date modifyStamp) {
 		this.modifyStamp = modifyStamp;
 	}
+	public ThemeMappingDTO() {
 
-	public ThemeMapping() {
-		// TODO Auto-generated constructor stub
 	}
-    
-    
+	
+   
 }

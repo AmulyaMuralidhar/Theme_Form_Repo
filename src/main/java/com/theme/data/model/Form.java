@@ -1,11 +1,7 @@
 package com.theme.data.model;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import jakarta.validation.constraints.NotBlank;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document(collection = "FormSchema")
@@ -14,22 +10,12 @@ public class Form {
     @NotBlank(message = "Form ID cannot not be empty")
     private String formId; // Primary Key
     @NotBlank(message = "Form Name cannot not be empty")
+    private String formName;
     private Object formSchema;
     private Date date;
     private Date modifiedDate;
     private String clientId;
     
-    public Form(@NotBlank(message = "Form ID cannot not be empty") String formId,
-			@NotBlank(message = "Form Name cannot not be empty") Object formSchema, Date date, Date modifiedDate,
-			String clientId) {
-		super();
-		this.formId = formId;
-		this.formSchema = formSchema;
-		this.date = date;
-		this.modifiedDate = modifiedDate;
-		this.clientId = clientId;
-	}
-
 	public String getClientId() {
 		return clientId;
 	}
@@ -70,4 +56,14 @@ public class Form {
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
+	public String getFormName() {
+		return formName;
+	}
+
+	public void setFormName(String formName) {
+		this.formName = formName;
+	}
+    
+    
 }

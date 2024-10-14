@@ -1,17 +1,13 @@
-package com.theme.data.model;
-
-import java.util.Date;
-
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.theme.data.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import java.util.Date;
 
-@Document(collection = "FormDataModel")
-public class FormData {
-  
-    @NotBlank(message = "Form Id cannot not be empty")
-    private String formId; // Foreign Key
-    @NotBlank(message = "Form Name cannot not be empty")
+public class FormDataDTO {
+
+    @NotBlank(message = "Form Id cannot be empty")
+    private String formId;
+    @NotBlank(message = "Form Name cannot be empty")
     private String formName;
     private Object formData;
     private Date date;
@@ -53,7 +49,9 @@ public class FormData {
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
-	public FormData() {
-
+	public FormDataDTO() {
+		
 	}
+    
+    
 }
