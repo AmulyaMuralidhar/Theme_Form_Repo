@@ -12,7 +12,7 @@ public interface ThemeRepository extends MongoRepository<Theme, String> {
     Optional<Theme> existsByThemeId(String themeId);
     
     @Query("{ 'themeId' : ?0 }")
-    Theme findByThemeId(String themeId);
+    Optional<Theme> findByThemeId(String themeId);
     
     @Query("{ 'themeName' : ?0 }")
     Optional<Theme> findByThemeName(String themeName);

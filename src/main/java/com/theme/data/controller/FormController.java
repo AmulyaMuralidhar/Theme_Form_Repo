@@ -17,7 +17,7 @@ public class FormController {
     @Autowired
     private FormService formService;
 
-    @GetMapping("/forms")
+    @GetMapping("/list")
     public ResponseEntity<List<FormDTO>> getAllForms() {
         List<FormDTO> forms = formService.getAllForms();
         return (forms != null && !forms.isEmpty())? new ResponseEntity<>(forms, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);

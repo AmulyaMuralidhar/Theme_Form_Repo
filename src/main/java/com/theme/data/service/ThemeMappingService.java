@@ -21,12 +21,6 @@ public class ThemeMappingService {
 				.toList(); // Using Java 17 features
 	}
 
-	public ThemeMappingDTO getThemeMappingByThemeId(String themeId) {
-		ThemeMapping themeMapping = themeMappingRepository.findById(themeId)
-				.orElseThrow(() -> new ThemeCustomException("ThemeMapping with themeId " + themeId + " not found"));
-		return convertToDTO(themeMapping);
-	}
-
 	public ThemeMappingDTO getThemeMappingByformId(String formId) {
 		ThemeMapping themeMapping = themeMappingRepository.findByFormId(formId)
 				.orElseThrow(() -> new ThemeCustomException("ThemeMapping with FormId " + formId + " not found"));

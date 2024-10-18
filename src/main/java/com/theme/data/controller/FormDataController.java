@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/forms/data")
+@RequestMapping("/form/data")
 public class FormDataController {
 
     @Autowired

@@ -1,5 +1,7 @@
 package com.theme.data.dto;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -8,11 +10,13 @@ public class ThemeDTO {
 		private String themeId;
 		private String themeName;
 	    private Object themeData; // Object to save column data in JSON format
-	    private Date Date = new Date();
+		private Date Date = new Date();
 	    private Date modifyDate = new Date();
 	    private String clientId;
+	    private List<String> formIds;
+
 	    
-	    public String getClientId() {
+		public String getClientId() {
 			return clientId;
 		}
 		public void setClientId(String clientId) {
@@ -31,6 +35,7 @@ public class ThemeDTO {
 		public void setThemeName(String themeName) {
 			this.themeName = themeName;
 		}
+
 		public Object getThemeData() {
 			return themeData;
 		}
@@ -49,9 +54,14 @@ public class ThemeDTO {
 		public void setModifyDate(Date modifyDate) {
 			this.modifyDate = modifyDate;
 		}
-
+		
+		public List<String> getFormIds() {
+			return formIds;
+		}
+		public void setFormIds(List<String> formIds) {
+			this.formIds = formIds;
+		}
 		public ThemeDTO() {
-			super();
 			// TODO Auto-generated constructor stub
 		}
 	

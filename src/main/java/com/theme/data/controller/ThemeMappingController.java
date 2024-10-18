@@ -22,16 +22,10 @@ import jakarta.validation.Valid;
 	    @Autowired
 	    private ThemeMappingService themeMappingService;
 
-	    @GetMapping
+	    @GetMapping("/mapped")
 	    public ResponseEntity<List<ThemeMappingDTO>> getAllThemeMaps() {
 	        List<ThemeMappingDTO> themeDTOs = themeMappingService.getAllThemes();
 	        return (themeDTOs != null && !themeDTOs.isEmpty())  ? new ResponseEntity<>(themeDTOs, HttpStatus.OK)  : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-
-	    @GetMapping("/mapped/{themeId}")
-	    public ResponseEntity<ThemeMappingDTO> getThemeMappingByThemeId(@PathVariable String themeId) {
-	        ThemeMappingDTO themeMappingDTO = themeMappingService.getThemeMappingByThemeId(themeId);
-	        return new ResponseEntity<>(themeMappingDTO, HttpStatus.OK);
 	    }
 
 	    @PostMapping("/save")

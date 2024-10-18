@@ -2,6 +2,7 @@ package com.theme.data.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.theme.data.dto.ThemeDTO;
 import com.theme.data.service.ThemeService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/theme")
-public class Theme_Controller {
+public class ThemeController {
 
 	@Autowired
 	private ThemeService themeService;
@@ -23,19 +24,19 @@ public class Theme_Controller {
 		return themes != null ? new ResponseEntity<>(themes, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/theme/data/{themeId}")
-	public ResponseEntity<ThemeDTO> getThemeByThemeId(@PathVariable String themeId) {
-        ThemeDTO themeMapping = themeService.getThemeByThemeId(themeId);
-        return new ResponseEntity<>(themeMapping, HttpStatus.OK);
-    }
-
-	@PostMapping("/theme/data/save")
-	public ResponseEntity<ThemeDTO> createTheme(@Valid @RequestBody ThemeDTO themeDTO) {
-		ThemeDTO createdTheme = themeService.createTheme(themeDTO);
-		return new ResponseEntity<>(createdTheme, HttpStatus.CREATED); // Return created theme with 201 status
+	@GetMapping("/data/{themeId}")
+	public ResponseEntity<ThemeDTO> getThemeById(@PathVariable String themeId) {
+		ThemeDTO themeDTO = themeService.getThemeById(themeId);
+		return themeDTO != null ? new ResponseEntity<>(themeDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@PutMapping("/theme/data/{themeId}")
+	@PostMapping("/data/save")
+	public ResponseEntity<ThemeDTO> createTheme(@Validated @RequestBody ThemeDTO themeDTO) {		
+		ThemeDTO createdTheme = themeService.createTheme(themeDTO);
+		return new ResponseEntity<>(createdTheme, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/data/{themeId}")
 	public ResponseEntity<ThemeDTO> updateThemeById(@PathVariable String themeId, @Valid @RequestBody ThemeDTO themeDTO) {
 		ThemeDTO updatedTheme = themeService.updateThemeById(themeId, themeDTO);
 		return updatedTheme != null ? new ResponseEntity<>(updatedTheme, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
